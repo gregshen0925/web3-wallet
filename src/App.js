@@ -6,15 +6,16 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-//import PageSelectAction from './Components/PageSelectAction';
-//import PageImportWallet from './Components/PageImportWallet';
-//import PageCreateWallet from './Components/PageCreateWallet';
-import PageSelectAction from './Components/PageSelectAction';
+
 import WelcomeLayout from './Components/PageWelcome';
+import SelectActionLayout from './Components/PageSelectAction';
+import ImportWalletLayout from './Components/PageImportWallet';
+import CreatePasswordLayout from './Components/PageCreatePassword';
+import SeedPhraseLayout from './Components/PageSeedPhrase';
+import PageValidateSeedPhrase from './Components/PageValidateSeedPhrase';
+// page -> component -> component ->1 state -> 
+//                                ->2 function -> 
 
-
-
-// import your route component
 
 
 function App() {
@@ -22,11 +23,14 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<PageSelectAction />} />
         <Route index element={<WelcomeLayout />} />
-        <Route path="/select-action" element={<PageSelectAction />} />
-        <Route path="/import-wallet" element={<PageSelectAction />} />
-        <Route path="/create-action" element={<PageSelectAction />} />
+        <Route path="/select-action" element={<SelectActionLayout />} />
+        <Route path="/import-wallet" element={<ImportWalletLayout />} />
+        <Route path="/create-password" element={<CreatePasswordLayout />} />
+        <Route path="create-password/seed-phrase" element={<SeedPhraseLayout />} />
+        <Route path="create-password/validate-seed-phrase" element={<PageValidateSeedPhrase />} />
+
+
 
 
       </Routes>

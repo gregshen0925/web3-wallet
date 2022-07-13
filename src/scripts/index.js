@@ -1,6 +1,7 @@
 const bip39 = require('bip39')
 
-
-async function generate() {
+const main = async () => {
     const mnemonic = await bip39.generateMnemonic()
+    console.log(mnemonic)
 }
+main()
