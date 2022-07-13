@@ -13,7 +13,7 @@ function CreateWalletLayout() {
   navigate(path);
 }
 
-export default function PageB() {
+export default function PageSelectAction() {
   return (
     <div>
       <button onClick={ImportWalletLayout}>Import wallet</button>

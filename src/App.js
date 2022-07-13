@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
 
 import {
@@ -9,7 +9,8 @@ import {
 //import PageSelectAction from './Components/PageSelectAction';
 //import PageImportWallet from './Components/PageImportWallet';
 //import PageCreateWallet from './Components/PageCreateWallet';
-import PageB from './Components/PageSelectAction';
+import PageSelectAction from './Components/PageSelectAction';
+import WelcomeLayout from './Components/PageWelcome';
 
 
 
@@ -21,8 +22,11 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App />} />
-        <Route index element={<PageB />} />
+        <Route path="/" element={<PageSelectAction />} />
+        <Route index element={<WelcomeLayout />} />
+        <Route path="/select-action" element={<PageSelectAction />} />
+        <Route path="/import-wallet" element={<PageSelectAction />} />
+        <Route path="/create-action" element={<PageSelectAction />} />
 
 
       </Routes>
