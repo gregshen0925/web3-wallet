@@ -15,7 +15,6 @@ app.get('/create-mnenomic', async (req, res) => {
     console.log('create mnenomic')
     res.send(mnemonic)
 
-
 })
 
 app.listen(port, () => {
