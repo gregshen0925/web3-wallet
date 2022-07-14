@@ -35,6 +35,6 @@ console.log('public key:', publicKey)
 // wallet address
 const address1 = wallet1.getAddressString()
 console.log("address1:", address1)
-// Encoding Address
+// Encoding Address with EIP-55(Mixed-case checksum address encoding)
 const encAddress1 = wallet1.getChecksumAddressString()
 console.log("encAddress1:", encAddress1)
