@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom'
 
 export default function PageSeedPhrase() {
     const navigate = useNavigate()
-
     const [mnemonic, setMnemonic] = useState("")
+
     async function generate() {
         const options = {
             method: "GET",
@@ -18,7 +18,6 @@ export default function PageSeedPhrase() {
         fetch('http://localhost:8000/create-mnenomic', options).then(result => result.text()).then(data => {
             setMnemonic(data)
             localStorage.setItem('mnemonic', data)
-
         })
     }
     const handleSubmit = () => {
