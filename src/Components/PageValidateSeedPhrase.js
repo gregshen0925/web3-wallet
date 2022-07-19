@@ -6,9 +6,10 @@ import { shuffle } from '../functions/shuffle'
 
 export default function PageValidateSeedPhrase() {
     const navigate = useNavigate()
-    console.log(typeof (localStorage.getItem('mnemonic')))
     const [mnemonic, setMnemonic] = useState([])
     const [shuffleIndex, setShuffleIndex] = useState([])
+    const [userPick, setUserPick] = useState(new Array(12))
+
     //shuffle mnemonic
     useEffect(() => {
         const _mnemonic = localStorage.getItem('mnemonic').split(" ")
@@ -16,10 +17,6 @@ export default function PageValidateSeedPhrase() {
         setMnemonic(_mnemonic)
         setShuffleIndex(_shuffleIndex)
     }, [])
-
-
-    const [userPick, setUserPick] = useState(new Array(12))
-
 
     const handleMnemonic = () => {
         if (userPick.length !== 12) {
