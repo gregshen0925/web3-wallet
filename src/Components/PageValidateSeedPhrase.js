@@ -1,54 +1,61 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { shuffle } from '../functions/shuffle'
 
 
 export default function PageValidateSeedPhrase() {
     const navigate = useNavigate()
-    const mnemonic = localStorage.getItem('mnemonic').split(" ")
-    // shuffle function
-    function shuffle(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            let j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array
-    }
+    console.log(typeof (localStorage.getItem('mnemonic')))
+    const [mnemonic, setMnemonic] = useState([])
+    const [shuffleIndex, setShuffleIndex] = useState([])
     //shuffle mnemonic
-    const shuffled = shuffle(mnemonic)
-    console.log(typeof shuffled)
+    useEffect(() => {
+        const _mnemonic = localStorage.getItem('mnemonic').split(" ")
+        const _shuffleIndex = shuffle([...Array(12).keys()])
+        setMnemonic(_mnemonic)
+        setShuffleIndex(_shuffleIndex)
+    }, [])
 
-    const [words, setWords] = useState('')
+
+    const [userPick, setUserPick] = useState(new Array(12))
 
 
     const handleMnemonic = () => {
-        if (words.length !== 12) {
+        if (userPick.length !== 12) {
             alert("You need twelve words")
             return
         }
-        if (words !== mnemonic) {
+        const userPickString = userPick.join(' ')
+        const mnemonicString = mnemonic.join(" ")
+        console.log(userPickString)
+        console.log(mnemonicString)
+        if (userPickString !== mnemonicString) {
+
             alert("Wrong answer")
             return
         }
         navigate('../wallet')
     }
+
+    const handleClick = (e, index) => {
+
+        const _userPick = userPick
+        _userPick[index] = e.target.value
+        setUserPick([..._userPick])
+
+    }
+
     return (
         <>
             <div>PageValidateSeedPhrase</div>
-            <button onClick={() => setWords(words.push(shuffled[0]))}>{shuffled[0]}</button>
-            <button onClick={() => setWords(words.push(shuffled[1]))}>{shuffled[1]}</button>
-            <button onClick={() => setWords(words.push(shuffled[2]))}>{shuffled[2]}</button>
-            <button onClick={() => setWords(words.push(shuffled[3]))}>{shuffled[3]}</button>
-            <button onClick={() => setWords(words.push(shuffled[4]))}>{shuffled[4]}</button>
-            <button onClick={() => setWords(words.push(shuffled[5]))}>{shuffled[5]}</button>
-            <button onClick={() => setWords(words.push(shuffled[6]))}>{shuffled[6]}</button>
-            <button onClick={() => setWords(words.push(shuffled[7]))}>{shuffled[7]}</button>
-            <button onClick={() => setWords(words.push(shuffled[8]))}>{shuffled[8]}</button>
-            <button onClick={() => setWords(words.push(shuffled[9]))}>{shuffled[9]}</button>
-            <button onClick={() => setWords(words.push(shuffled[10]))}>{shuffled[10]}</button>
-            <button onClick={() => setWords(words.push(shuffled[11]))}>{shuffled[11]}</button>
+            {
+                shuffleIndex.map((index) => (
+                    <button key={index} onClick={event => handleClick(event, index)} value={mnemonic[index]}>{mnemonic[index]}</button>
+                ))
+            }
 
-            {words && <h3>Your mnemonic: {words}</h3>}
+            {userPick && <h3>Your mnemonic: {userPick}</h3>}
 
             <button onClick={handleMnemonic}>Next</button>
         </>
